@@ -8,3 +8,7 @@
 https://trello.com/b/vRF4CjgX/project-1
 
 ## WireFrames
+
+![alt text](https://github.com/chadkeeven/project-1-browser-game/blob/master/images/wireframes/Page_1.png "Landing Page")
+![alt text](https://github.com/chadkeeven/project-1-browser-game/blob/master/images/wireframes/Page_2.png "Game Page")
+![alt text](https://github.com/chadkeeven/project-1-browser-game/blob/master/images/wireframes/High_Scores.png "High Score")
