@@ -28,4 +28,15 @@ $(document).ready(function() {
 		},stopLightRan);
 
 	//Move user piece
+
+	var currentMargin = 0;
+	$(this).keyup(function(event) {
+		if ($('.greenLight').is(':visible')) {
+			currentMargin += 5;
+			$('.user_piece').css('margin-left', currentMargin + '%');
+		}else if (currentMargin > 0) {
+			currentMargin -= 5;
+			$('user_piece').css('margin-left', currentMargin + '%');
+		}
+	});
 });
