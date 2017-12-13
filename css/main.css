@@ -29,5 +29,21 @@ h1 {
 }
 .clock {
 	color: lawngreen;
-	font-size: 5%;
+	font-size: 400%;
+}
+
+.stopLight {
+	height: 20%;
+	width: 10%;
+	background-color: grey;
+}
+.redLight {
+	background-color: red;
+	height: 50%;
+	border-radius: 100%;
+}
+.greenLight {
+	background-color: green;
+	height: 50%;
+	border-radius: 100%;
 }
