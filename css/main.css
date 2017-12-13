@@ -47,3 +47,11 @@ h1 {
 	height: 50%;
 	border-radius: 100%;
 }
+
+.user_piece {
+	background-color: red;
+	height: 10vh;
+	width: 10vw;
+	position: relative;
+	top: 50%;
+}
