@@ -16,8 +16,8 @@ $(document).ready(function() {
 	$('.greenLight').hide();
 
 	let stopLightRan = Math.random() * (3000 - 1000) + 1000;
-		setInterval(function(){
-				console.log(stopLightRan);
+	setInterval(function(){
+				//console.log(stopLightRan);
 				if ($('.greenLight').is(':visible')) {
 					$('.redLight').show();
 					$('.greenLight').hide();
@@ -25,18 +25,24 @@ $(document).ready(function() {
 					$('.greenLight').show();
 					$('.redLight').hide();
 				}	
-		},stopLightRan);
+			},stopLightRan);
 
 	//Move user piece
 
 	var currentMargin = 0;
 	$(this).keyup(function(event) {
-		if ($('.greenLight').is(':visible')) {
+		console.log($('.greenLight').is(':visible') === true);
+		if ($('.greenLight').is(':visible') === true) {
+			console.log("light is green");
 			currentMargin += 5;
 			$('.user_piece').css('margin-left', currentMargin + '%');
-		}else if (currentMargin > 0) {
-			currentMargin -= 5;
-			$('user_piece').css('margin-left', currentMargin + '%');
+		}else if($('.greenLight').is(':visible') === false){
+			if ($('.redLight').is(':visible') && currentMargin > 0){
+				console.log("light is red");
+				currentMargin -= 5;
+				$('.user_piece').css('margin-left', currentMargin + '%');
+			}
 		}
+		console.log(currentMargin);
 	});
 });
