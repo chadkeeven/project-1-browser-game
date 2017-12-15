@@ -137,7 +137,7 @@ $(document).ready(function() {
 	 	for(var rank = 1; rank <= scoresArrTwo.length; rank++){
 	 		if (namesArrTwo[rank-1] === "NEW") {
 	 			locationOfNewName = rank -1;
-	 			$("#"+ rank + "").html("<input type='text' id='newName' name='newName'> : " + scoresArrTwo[rank-1]);
+	 			$("#"+ rank + "").html("<input type='text' id='newName' name='newName' placeholder='Initials' maxlength='3'> : " + scoresArrTwo[rank-1]);
 	 			$("#addNameButton").show();
 
 	 		}else{
@@ -150,7 +150,8 @@ $(document).ready(function() {
 	 	$("#addNameButton").click(function(event) {
 	 		//console.log("score is at:" + locationOfNewName);
 	 		//console.log($('#newName').val());
-	 		namesArrTwo[locationOfNewName] = $('#newName').val();
+	 		var newNameValue = $('#newName').val();
+	 		namesArrTwo[locationOfNewName] = newNameValue;
 	 		localStorage.setItem("scores", scoresArrTwo);
 	 	localStorage.setItem("names", namesArrTwo);
 	 	});
