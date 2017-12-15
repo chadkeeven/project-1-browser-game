@@ -17,12 +17,16 @@ $(document).ready(function() {
 	
 
 	var switchPending = false;
+	//check if switch is pending is true, every 50ms
 	setInterval(function(){
+
 		if (!isWinner()) {
+
 			let  stopLightRan = Math.random() * (3000 - 1000) + 1000;
 			if (!switchPending) {
-				console.log(stopLightRan);
+				//console.log(stopLightRan);
 				setTimeout(function(){
+					//console.log("new switch");
 					if ($('.greenLight').is(':visible')) {
 						$('.redLight').show();
 						$('.greenLight').hide();
@@ -32,8 +36,7 @@ $(document).ready(function() {
 					}
 					switchPending = false;		
 				},stopLightRan);
-			}
-			switchPending = true;
+			}switchPending = true;
 		}
 	},50);
 
@@ -53,14 +56,15 @@ $(document).ready(function() {
 					$('.user_piece').css('margin-left', currentMargin + '%');
 				}
 			}
-		}else{
-			alert("Game is over!");
 		}
 	});
 
 	//Winning Condition
 	function isWinner(){
-		if (currentMargin === 100) {
+		if (currentMargin === 90) {
+			localStorage.setItem("score", total_time);
+			highScores();
+			$('#firstPlace').html(localStorage.getItem("score"));
 			$('#highScoreModal').show();
 			total_time = 0;
 			currentMargin = 0;
@@ -72,9 +76,56 @@ $(document).ready(function() {
 		}
 	}
 
+	//Post to high scores
+	var scoresArr = [1,2,3,4,5];
+	localStorage.setItem("scores", scoresArr);
+	function highScores(){
+		var timeHasBeenAdded = false;
+	//	console.log(localStorage.getItem("scores")); 
+	var scoresString =localStorage.getItem("scores");
+	var scoresArrTwo =[];
+ 	//!!Convert JSON string of scores into an array of numbers
+ 	var currentString= scoresString.split(",");
+ 	for (var i in currentString){
+ 		var currentNumber = parseInt(currentString[i]);
+ 		if (!timeHasBeenAdded) {
+ 			if (total_time < currentNumber) {
+ 				scoresArrTwo.push(total_time);
+ 				scoresArrTwo.push(currentNumber);
+ 				timeHasBeenAdded = true;
+ 			}else{
+ 				scoresArrTwo.push(currentNumber);
+ 			}
+ 		}else{
+ 			scoresArrTwo.push(currentNumber);
+ 		}
+ 		//console.log(scoresArrtwo[i]);
+
+ 	}
+ 	if (scoresArrTwo.length < 5) {
+ 		scoresArrTwo.pop();
+ 	}
+ 	localStorage.setItem("scores", scoresArrTwo);
+ }
+
 	//x button on highscore modal
 	$('.xButton').click(function(event) {
 		$('.modal').hide();
 	});
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
