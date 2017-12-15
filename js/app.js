@@ -2,6 +2,9 @@ $(document).ready(function() {
 	//Clock
 	var total_time = 0;
 	var clock;
+	//Move user piece
+	var currentMargin = 0;
+	var canMove = false;
 
 	function runClock() {
 		clock = setInterval(function() {
@@ -27,8 +30,9 @@ $(document).ready(function() {
 			$('.modal').hide();
 			runClock();
 			runStopLight();
+
 			canMove = true;
-			playerCanMove();
+			//playerCanMove();
 		}, 3000);
 	});
 	//Stoplight
@@ -63,27 +67,22 @@ $(document).ready(function() {
 			//clearInterval(this);
 		}, 50);
 	}
-	//Move user piece
-	var currentMargin = 0;
-	var canMove = false;
-
-	function playerCanMove() {
-		$(this).keyup(function(event) {
-			if (isWinner() == false) {
-				if ($('.greenLight').is(':visible') === true) {
-					currentMargin += 5;
+	$(this).keyup(function(event) {
+		if (isWinner() === false) {
+			if ($('.greenLight').is(':visible') === true) {
+				currentMargin += 5;
+				console.log(currentMargin);
+				$('.user_piece').css('margin-left', currentMargin + '%');
+				//console.log(isWinner());
+				//isWinner();
+			} else if ($('.greenLight').is(':visible') === false) {
+				if ($('.redLight').is(':visible') && currentMargin > 0) {
+					currentMargin -= 5;
 					$('.user_piece').css('margin-left', currentMargin + '%');
-					console.log(isWinner());
-					isWinner();
-				} else if ($('.greenLight').is(':visible') === false) {
-					if ($('.redLight').is(':visible') && currentMargin > 0) {
-						currentMargin -= 5;
-						$('.user_piece').css('margin-left', currentMargin + '%');
-					}
 				}
 			}
-		});
-	}
+		}
+	});
 	//Winning Condition
 	function isWinner() {
 		if (currentMargin === 90) {
@@ -94,11 +93,12 @@ $(document).ready(function() {
 			clearInterval(stopLight);
 			total_time = 0;
 			currentMargin = 0;
+			canMove = false;
 			$('.user_piece').css('margin-left', currentMargin + '%');
 			console.log($('.user_piece').css('margin-left'));
 			return true;
 		} else {
-			console.log(currentMargin);
+			//console.log(currentMargin);
 			return false;
 		}
 	}
@@ -161,7 +161,8 @@ $(document).ready(function() {
 		while (scoresArrTwo.length > 5) {
 			namesArrTwo.pop(scoresArrTwo);
 			scoresArrTwo.pop();
-		}for (var rank = 1; rank <= scoresArrTwo.length; rank++) {
+		}
+		for (var rank = 1; rank <= scoresArrTwo.length; rank++) {
 			if (namesArrTwo[rank - 1] === "NEW") {
 				locationOfNewName = rank - 1;
 				$("#" + rank + "").html("<input type='text' id='newName' name='newName' placeholder='Initials' maxlength='3'> : " + scoresArrTwo[rank - 1]);
@@ -196,4 +197,4 @@ $(document).ready(function() {
 		$('.modal').hide();
 	});
 
-});
+}); //
