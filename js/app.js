@@ -1,12 +1,35 @@
 $(document).ready(function() {
 	//Clock
 	var total_time = 0;
-	setInterval(function(){
+var clock;
+	function runClock(){
+	clock =setInterval(function(){
 		//console.log(total_time);
 		total_time += 0.01;
 		total_time = Math.round(100 * total_time)/100;
 		$(".clock").html(total_time);
 	},10);
+}
+
+
+$(".playButton").click(function(event) {
+	$('#playModal').show();
+	$(".playButton").hide();
+	$("#highScoreModal").hide();
+	$('#playModal').html(3);
+	 setTimeout(function(){
+	 	$('#playModal').html(2);
+	 },1000);
+	 setTimeout(function(){
+	 	$('#playModal').html(1);
+	 },2000);
+	setTimeout(function(){
+		$('.modal').hide();
+		runClock();
+		runStopLight();
+	},3000);
+});
+//runClock();
 	//Stoplight
 	/*
 	To Do:
@@ -18,6 +41,7 @@ $(document).ready(function() {
 
 	var switchPending = false;
 	//check if switch is pending is true, every 50ms
+	function runStopLight(){
 	setInterval(function(){
 
 		if (!isWinner()) {
@@ -38,8 +62,9 @@ $(document).ready(function() {
 				},stopLightRan);
 			}switchPending = true;
 		}
+		clearInterval(this);
 	},50);
-
+}
 	//Move user piece
 
 	var currentMargin = 80;
@@ -65,6 +90,8 @@ $(document).ready(function() {
 			
 			highScores();
 			$('#highScoreModal').show();
+			$('.playButton').show();
+			clearInterval(clock);
 			total_time = 0;
 			currentMargin = 0;
 			$('.user_piece').css('margin-left', currentMargin + '%');
@@ -78,8 +105,8 @@ $(document).ready(function() {
 	function setDefaultValues(){
 		//console.log(localStorage.getItem("scores")=== null );
 		if(localStorage.getItem("scores") === null){
-			var scoresArr = [5,8,10,12,15];
-			var namesArr = ["Jim","Bob","Sid","ECK", "Si"];
+			var scoresArr = [2,4,6,10,12];
+			var namesArr = ["CP1","CP2","CP3","CP4", "CP5"];
 			localStorage.setItem("scores", scoresArr);
 			localStorage.setItem("names", namesArr);
 		//console.log("default values set");
@@ -150,10 +177,12 @@ $(document).ready(function() {
 	 	$("#addNameButton").click(function(event) {
 	 		//console.log("score is at:" + locationOfNewName);
 	 		//console.log($('#newName').val());
-	 		var newNameValue = $('#newName').val();
+	 		var newNameValue = $('#newName').val().toUpperCase();
 	 		namesArrTwo[locationOfNewName] = newNameValue;
+	 		$("input").hide();
+	 		$("#"+ (locationOfNewName + 1) + "").html(namesArrTwo[locationOfNewName] + " : " + scoresArrTwo[locationOfNewName]);
 	 		localStorage.setItem("scores", scoresArrTwo);
-	 	localStorage.setItem("names", namesArrTwo);
+	 		localStorage.setItem("names", namesArrTwo);
 	 	});
 
 	 
