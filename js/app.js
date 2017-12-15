@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 	//Move user piece
 
-	var currentMargin = 0;
+	var currentMargin = 80;
 
 	$(this).keyup(function(event) {
 		if (isWinner() == false) {
@@ -62,9 +62,8 @@ $(document).ready(function() {
 	//Winning Condition
 	function isWinner(){
 		if (currentMargin === 90) {
-			localStorage.setItem("score", total_time);
+			
 			highScores();
-			$('#firstPlace').html(localStorage.getItem("score"));
 			$('#highScoreModal').show();
 			total_time = 0;
 			currentMargin = 0;
@@ -76,37 +75,89 @@ $(document).ready(function() {
 		}
 	}
 
+	function setDefaultValues(){
+		//console.log(localStorage.getItem("scores")=== null );
+		if(localStorage.getItem("scores") === null){
+			var scoresArr = [5,8,10,12,15];
+			var namesArr = ["Jim","Bob","Sid","ECK", "Si"];
+			localStorage.setItem("scores", scoresArr);
+			localStorage.setItem("names", namesArr);
+		//console.log("default values set");
+	}
+}
+	//localStorage.setItem("score", total_time);
+	//$('#firstPlace').html(localStorage.getItem("score"));
 	//Post to high scores
-	var scoresArr = [1,2,3,4,5];
-	localStorage.setItem("scores", scoresArr);
+	// var scoresArr = [5,8,10,12,15];
+	// var namesArr = ["Jim","Bob","Sid","ECK", "Si"];
+	// localStorage.setItem("scores", scoresArr);
+	// localStorage.setItem("names", namesArr);
+	setDefaultValues();
+	var locationOfNewName = 0;
+	var scoresArrTwo =[];
+		var namesArrTwo = [];
+
 	function highScores(){
 		var timeHasBeenAdded = false;
-	//	console.log(localStorage.getItem("scores")); 
-	var scoresString =localStorage.getItem("scores");
-	var scoresArrTwo =[];
- 	//!!Convert JSON string of scores into an array of numbers
- 	var currentString= scoresString.split(",");
- 	for (var i in currentString){
- 		var currentNumber = parseInt(currentString[i]);
- 		if (!timeHasBeenAdded) {
- 			if (total_time < currentNumber) {
- 				scoresArrTwo.push(total_time);
- 				scoresArrTwo.push(currentNumber);
- 				timeHasBeenAdded = true;
- 			}else{
- 				scoresArrTwo.push(currentNumber);
- 			}
- 		}else{
- 			scoresArrTwo.push(currentNumber);
- 		}
- 		//console.log(scoresArrtwo[i]);
+		
+		//	console.log(localStorage.getItem("scores")); 
+		var scoresString =localStorage.getItem("scores");
+		var namesString = localStorage.getItem("names");
+		
+	 	//!!Convert JSON string of scores into an array of numbers
+	 	var scoresJson = scoresString.split(",");
+	 	var namesJson = namesString.split(",");
+	 	console.log(namesJson);
+	 	//console.log(scoresJson);
+	 	for (var i in scoresJson){
+	 		var currentNumber = parseFloat(scoresJson[i]);
+	 		if (!timeHasBeenAdded) {
+	 			if (total_time < currentNumber) {
+	 				namesArrTwo.push("NEW");
+	 				scoresArrTwo.push(total_time);
+	 				namesArrTwo.push(namesJson[i]);
+	 				scoresArrTwo.push(currentNumber);
+	 				timeHasBeenAdded = true;
+	 			}else{
+	 				namesArrTwo.push(namesJson[i]);
+	 				scoresArrTwo.push(currentNumber);
+	 			}
+	 		}else{
+	 			namesArrTwo.push(namesJson[i]);
+	 			scoresArrTwo.push(currentNumber);
+	 		}
+	 		//console.log(scoresArrtwo[i]);
 
- 	}
- 	if (scoresArrTwo.length < 5) {
- 		scoresArrTwo.pop();
- 	}
- 	localStorage.setItem("scores", scoresArrTwo);
- }
+	 	}
+	 	while (scoresArrTwo.length > 5) {
+	 		namesArrTwo.pop();
+	 		scoresArrTwo.pop();
+	 	}
+	 	
+	 	for(var rank = 1; rank <= scoresArrTwo.length; rank++){
+	 		if (namesArrTwo[rank-1] === "NEW") {
+	 			locationOfNewName = rank -1;
+	 			$("#"+ rank + "").html("<input type='text' id='newName' name='newName'> : " + scoresArrTwo[rank-1]);
+	 			$("#addNameButton").show();
+
+	 		}else{
+	 			$("#"+ rank + "").html(namesArrTwo[rank-1] + " : " + scoresArrTwo[rank-1]);
+	 		}
+	 	}
+	 		 	
+	 }
+	 //eventlistner for submit for name on highscore
+	 	$("#addNameButton").click(function(event) {
+	 		//console.log("score is at:" + locationOfNewName);
+	 		//console.log($('#newName').val());
+	 		namesArrTwo[locationOfNewName] = $('#newName').val();
+	 		localStorage.setItem("scores", scoresArrTwo);
+	 	localStorage.setItem("names", namesArrTwo);
+	 	});
+
+	 
+
+
 
 	//x button on highscore modal
 	$('.xButton').click(function(event) {

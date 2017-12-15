@@ -70,3 +70,6 @@ h1 {
 .modal-content {
 	color: green;
 }
+#addNameButton {
+	display: none;
+}
