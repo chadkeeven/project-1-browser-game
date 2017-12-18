@@ -15,6 +15,14 @@ h1 {
 	text-align: center;
 	margin-top: 0%;
 }
+.greenPara {
+	color: green;
+	text-transform: uppercase;
+}
+.redPara {
+	color: red;
+	text-transform: uppercase;
+}
 .container {
 	height: 90vh;
 	width: 90%;
@@ -53,8 +61,8 @@ h1 {
 	background-color: red;
 	height: 10vh;
 	width: 10vw;
-	position: fixed;
-	top: 50%;
+	position: relative;
+	top: 20%;
 }
 #highScoreModal {
 	display:none;

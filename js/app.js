@@ -194,10 +194,9 @@ $(document).ready(function() {
 	});
 
 
-
 	//x button on highscore modal
 	$('.xButton').click(function(event) {
 		$('.modal').hide();
 	});
 
-}); //
+});
