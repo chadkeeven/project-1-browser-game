@@ -1,20 +1,35 @@
+//Make sure Document is ready before loading js
 $(document).ready(function() {
-	//Clock
-	var total_time = 0;
-	var clock;
-	//Move user piece
-	var currentMargin = 0;
-	var canMove = false;
+	var total_time = 0;	//Score for time
+	var clock;	//Clock for setInterval
+	var currentMargin = 0;	//Userpiece position
+	var canMove = false;	//Condtion if user can move
+	var switchPending = false;	//condtion if stoplight needs to change
+	var stopLight;	//stoplight for setinterval
+	var locationOfNewName = 0; //location of where to find new name for  high score
+	var scoresArrTwo = [];	//array that holds all of the scores
+	var namesArrTwo = []; //array that holds all of the names
+	setDefaultValues(); //sets default computer scores if no scores have been made
 
+	/*
+	function that runs the clock in game
+	runs every 10ms 
+	updates the clock by total_time element
+	*/
 	function runClock() {
 		clock = setInterval(function() {
-			//console.log(total_time);
 			total_time += 0.01;
 			total_time = Math.round(100 * total_time) / 100;
 			$(".clock").html(total_time);
 		}, 10);
 	}
 
+	/*
+	Click listener for playbutton
+	Performs a 3 second countdown
+	Invokes the runClock, runStopLight functions
+	Changes canMove to true so user can move when game starts
+	*/
 	$(".playButton").click(function(event) {
 		$('#playModal').show();
 		$(".playButton").hide();
@@ -30,7 +45,6 @@ $(document).ready(function() {
 			$('.modal').hide();
 			runClock();
 			runStopLight();
-
 			canMove = true;
 			//playerCanMove();
 		}, 3000);
@@ -40,8 +54,7 @@ $(document).ready(function() {
 	To Do:
 	-instead of hide change color to black or grey.
 	*/
-	var switchPending = false;
-	var stopLight;
+
 	//check if switch is pending is true, every 50ms
 	function runStopLight() {
 		$('.greenLight').hide();
@@ -69,16 +82,18 @@ $(document).ready(function() {
 	}
 	$(this).keyup(function(event) {
 		if (isWinner() === false) {
-			if ($('.greenLight').is(':visible') === true) {
-				currentMargin += 5;
-				console.log(currentMargin);
-				$('.user_piece').css('margin-left', currentMargin + '%');
-				//console.log(isWinner());
-				//isWinner();
-			} else if ($('.greenLight').is(':visible') === false) {
-				if ($('.redLight').is(':visible') && currentMargin > 0) {
-					currentMargin -= 5;
+			if (canMove) {
+				if ($('.greenLight').is(':visible') === true) {
+					currentMargin += 5;
+					console.log(currentMargin);
 					$('.user_piece').css('margin-left', currentMargin + '%');
+					//console.log(isWinner());
+					//isWinner();
+				} else if ($('.greenLight').is(':visible') === false) {
+					if ($('.redLight').is(':visible') && currentMargin > 0) {
+						currentMargin -= 5;
+						$('.user_piece').css('margin-left', currentMargin + '%');
+					}
 				}
 			}
 		}
@@ -93,7 +108,7 @@ $(document).ready(function() {
 			clearInterval(stopLight);
 			total_time = 0;
 			currentMargin = 0;
-			canMove = false;
+			//canMove = false;
 			$('.user_piece').css('margin-left', currentMargin + '%');
 			console.log($('.user_piece').css('margin-left'));
 			return true;
@@ -119,10 +134,7 @@ $(document).ready(function() {
 	// var namesArr = ["Jim","Bob","Sid","ECK", "Si"];
 	// localStorage.setItem("scores", scoresArr);
 	// localStorage.setItem("names", namesArr);
-	setDefaultValues();
-	var locationOfNewName = 0;
-	var scoresArrTwo = [];
-	var namesArrTwo = [];
+
 
 	function highScores() {
 		var timeHasBeenAdded = false;
