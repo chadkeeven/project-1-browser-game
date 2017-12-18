@@ -1,13 +1,13 @@
 //Make sure Document is ready before loading js
 $(document).ready(function() {
-	var total_time = 0;	//Score for time
-	var clock;	//Clock for setInterval
-	var currentMargin = 0;	//Userpiece position
-	var canMove = false;	//Condtion if user can move
-	var switchPending = false;	//condtion if stoplight needs to change
-	var stopLight;	//stoplight for setinterval
+	var total_time = 0; //Score for time
+	var clock; //Clock for setInterval
+	var currentMargin = 0; //Userpiece position
+	var canMove = false; //Condtion if user can move
+	var switchPending = false; //condtion if stoplight needs to change
+	var stopLight; //stoplight for setinterval
 	var locationOfNewName = 0; //location of where to find new name for  high score
-	var scoresArrTwo = [];	//array that holds all of the scores
+	var scoresArrTwo = []; //array that holds all of the scores
 	var namesArrTwo = []; //array that holds all of the names
 	setDefaultValues(); //sets default computer scores if no scores have been made
 
@@ -46,16 +46,13 @@ $(document).ready(function() {
 			runClock();
 			runStopLight();
 			canMove = true;
-			//playerCanMove();
 		}, 3000);
 	});
-	//Stoplight
-	/*
-	To Do:
-	-instead of hide change color to black or grey.
-	*/
 
+	//Stoplight
 	//check if switch is pending is true, every 50ms
+	//function that changes the green and red lights
+	//at random intervals between 1-3 seconds
 	function runStopLight() {
 		$('.greenLight').hide();
 		stopLight = setInterval(function() {
@@ -77,18 +74,18 @@ $(document).ready(function() {
 				}
 				switchPending = true;
 			}
-			//clearInterval(this);
 		}, 50);
 	}
+
+	//click listener that when a key is pressed
+	//allows the user to move forward if green
+	//or backwards if red
 	$(this).keyup(function(event) {
 		if (isWinner() === false) {
 			if (canMove) {
 				if ($('.greenLight').is(':visible') === true) {
 					currentMargin += 5;
-					console.log(currentMargin);
 					$('.user_piece').css('margin-left', currentMargin + '%');
-					//console.log(isWinner());
-					//isWinner();
 				} else if ($('.greenLight').is(':visible') === false) {
 					if ($('.redLight').is(':visible') && currentMargin > 0) {
 						currentMargin -= 5;
@@ -98,7 +95,13 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+
 	//Winning Condition
+	//Checks for winner
+	//if winner then highscores function is invoked
+	//clears the clock and stoplight intervals
+	//resets time and player back to 0
 	function isWinner() {
 		if (currentMargin === 90) {
 			highScores();
@@ -108,53 +111,39 @@ $(document).ready(function() {
 			clearInterval(stopLight);
 			total_time = 0;
 			currentMargin = 0;
-			//canMove = false;
+			canMove = false;
 			$('.user_piece').css('margin-left', currentMargin + '%');
-			console.log($('.user_piece').css('margin-left'));
 			return true;
 		} else {
-			//console.log(currentMargin);
 			return false;
 		}
 	}
 	//set default values if local storage is blank
 	//fill with CPU scores
 	function setDefaultValues() {
-		//console.log(localStorage.getItem("scores")=== null );
 		if (localStorage.getItem("scores") === null) {
 			var scoresArr = [6, 8, 10, 15, 18];
 			var namesArr = ["CP1", "CP2", "CP3", "CP4", "CP5"];
 			localStorage.setItem("scores", scoresArr);
 			localStorage.setItem("names", namesArr);
-			//console.log("default values set");
 		}
 	}
+
 	//Post to high scores
-	// var scoresArr = [5,8,10,12,15];
-	// var namesArr = ["Jim","Bob","Sid","ECK", "Si"];
-	// localStorage.setItem("scores", scoresArr);
-	// localStorage.setItem("names", namesArr);
-
-
 	function highScores() {
 		var timeHasBeenAdded = false;
 		canMove = false;
 		scoresArrTwo = [];
 		namesArrTwo = [];
 		$("#yourScore").html("Your Score: " + total_time);
-
-
-		//	console.log(localStorage.getItem("scores")); 
+		//Get values for scores and names from local storage
 		var scoresString = localStorage.getItem("scores");
 		var namesString = localStorage.getItem("names");
-
 		//!!Convert JSON string of scores into an array of numbers
 		var scoresJson = scoresString.split(",");
 		var namesJson = namesString.split(",");
-		//console.log(namesJson);
-		//console.log(scoresJson);
-		console.log(total_time);
-		//console.log(timeHasBeenAdded);
+		//test wheather or not the user score beat another score
+		//also pushes into position of score
 		for (var i = 0; i < scoresJson.length; i++) {
 			var currentNumber = parseFloat(scoresJson[i]);
 			if (!timeHasBeenAdded && total_time < currentNumber) {
@@ -168,12 +157,15 @@ $(document).ready(function() {
 				scoresArrTwo.push(currentNumber);
 			}
 		}
-		console.log(namesArrTwo);
-		//timeHasBeenAdded = false;
+		//Makes sure only top 5 scores and names are kept
 		while (scoresArrTwo.length > 5) {
-			namesArrTwo.pop(scoresArrTwo);
+			namesArrTwo.pop();
 			scoresArrTwo.pop();
 		}
+		//checks for if there was a new highscore
+		//finds where the new high score is
+		//if highscore a text box appears and a submit button
+		//asking to input intials
 		for (var rank = 1; rank <= scoresArrTwo.length; rank++) {
 			if (namesArrTwo[rank - 1] === "NEW") {
 				locationOfNewName = rank - 1;
@@ -185,12 +177,11 @@ $(document).ready(function() {
 		}
 
 	}
+
 	//eventlistner for submit for name on highscore
+	//if empty "FOO" is submitted as name instead
 	$("#addNameButton").click(function(event) {
-		//console.log("score is at:" + locationOfNewName);
-		//console.log($('#newName').val());
 		var newNameValue = $('#newName').val().toUpperCase();
-		//console.log(newNameValue);
 		if ($('#newName').val() === "") {
 			newNameValue = "FOO";
 		}
