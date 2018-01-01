@@ -1,9 +1,13 @@
 body {
-	height: 90vh;
-	margin: 0;
+/*	height: 90vh;
+	margin: 0;*/
 	font-family: 'Press Start 2P', cursive;
 }
-header {
+.title_header {
+	margin-top: 5%;
+}
+
+/*header {
 	height: 20vh;
 }
 main {
@@ -11,11 +15,10 @@ main {
 }
 footer {
 	height: 10vh;
-}
+}*/
 h1 {
-	text-align: center;
-	margin-top: 0%;
-}
+	font-size: 50px;
+}*/
 .greenPara {
 	color: green;
 	text-transform: uppercase;
@@ -24,11 +27,11 @@ h1 {
 	color: red;
 	text-transform: uppercase;
 }
-.container {
+/*.container {
 	height: 90vh;
 	width: 90%;
 	margin: 5%;
-}
+}*/
 .landingButtons{
 	display: flex;
 }
@@ -39,6 +42,8 @@ h1 {
 }
 .playButton {
 	font-family: 'Press Start 2P', cursive;
+	margin: 5%;
+	font-size: 36px;
 }
 /*.gameFunctions{
 	width: 100%;
