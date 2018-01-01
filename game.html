@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Game Page</title>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/app.js"></script>
@@ -12,7 +14,6 @@
 	<div class="container">
 		<div id="highScoreModal" class="modal">
 			<div class="modal-content">
-				<span class="xButton">&times;</span>
 				<p>high scores</p>
 				<ol class="highScoreList">
 					<li id="1"></li>
@@ -35,19 +36,16 @@
 			<div class="game_container">
 				<div id="playModal" class="modal">
 					<button class="playButton">PLAY!</button>
-				</div><!-- 
-				<div class="gameFunctions"> -->
+				</div>
 					<!-- StopLight -->
 					<div class="stopLight">
 						<div class="redLight"></div>
 						<div class ="greenLight"></div>
-
 					</div>
 					<!-- Game Clock -->
 					<div class="clock">
 						00.0
 					</div>
-				<!-- </div> -->
 				<div class="user_piece"></div>
 			</div>
 		</main>

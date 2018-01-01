@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	var total_time = 0; //Score for time
 	var clock; //Clock for setInterval
-	var currentMargin = 0; //Userpiece position
+	var currentMargin = 0; //Userpiece position‹
 	var canMove = false; //Condtion if user can move
 	var switchPending = false; //condtion if stoplight needs to change
 	var stopLight; //stoplight for setinterval
@@ -194,9 +194,9 @@ $(document).ready(function() {
 	});
 
 
-	//x button on highscore modal
-	$('.xButton').click(function(event) {
-		$('.modal').hide();
-	});
+	// //x button on highscore modal
+	// $('.xButton').click(function(event) {
+	// 	$('.modal').hide();
+	// });
 
 });
