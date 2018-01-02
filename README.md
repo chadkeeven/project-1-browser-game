@@ -6,7 +6,7 @@
 ## Programming
 ### Uses Bootstrap framework for the styling and formatting. JQuery for functionality. Stores highscores through local storage. 
 
-##PLAY!
+## PLAY!
 
 https://chadkeeven.github.io/project-1-browser-game/game.html
 

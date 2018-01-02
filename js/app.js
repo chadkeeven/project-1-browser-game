@@ -153,6 +153,7 @@ $(document).ready(function() {
 				namesArrTwo.push(namesJson[i]);
 				scoresArrTwo.push(currentNumber);
 				timeHasBeenAdded = true;
+				$("#yourScore").html("New High Score! Submit your initials! <br> Your Score: " + total_time);
 			} else {
 				namesArrTwo.push(namesJson[i]);
 				scoresArrTwo.push(currentNumber);
@@ -170,7 +171,7 @@ $(document).ready(function() {
 		for (var rank = 1; rank <= scoresArrTwo.length; rank++) {
 			if (namesArrTwo[rank - 1] === "NEW") {
 				locationOfNewName = rank - 1;
-				$("#" + rank + "").html("<input type='text' id='newName' name='newName' placeholder='FOO' maxlength='3'> : " + scoresArrTwo[rank - 1]);
+				$("#" + rank + "").html("<input type='text' id='newName' name='newName' maxlength='3'> : " + scoresArrTwo[rank - 1]);
 				$("#addNameButton").show();
 			} else {
 				$("#" + rank + "").html(namesArrTwo[rank - 1] + " : " + scoresArrTwo[rank - 1]);
