@@ -4,18 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Game Page</title>
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid text-center">
 		<div id="highScoreModal" class="modal">
 			<div class="modal-content">
-				<p>high scores</p>
-				<ol class="highScoreList">
+				<h2 class="text-uppercase">high scores</h2>
+				<ol class="highScoreCurrent text-justify">
 					<li id="1"></li>
 					<li id="2"></li>
 					<li id="3"></li>
@@ -27,36 +27,55 @@
 				<p id="yourScore"></p>
 			</div>
 		</div>
-		<header>
+		<div class="row">
 			<h1>STOP LIGHT GAME</h1>
+		</div>
+		<div class="row">	
 			<h2>Instructions</h2>
+		</div>
+		<div class="row">
 			<p>Press Play! Start tapping any key when light turns <span class="greenPara">green</span>to advance! Don't tap on <span class="redPara">red</span> otherwise you'll be going in the wrong direction! Get your box out of the black to end the game. Five fastest times make it on the leaderboard!</p>
-		</header>
-		<main>
+		</div>
+		<div class="row">
 			<div class="game_container">
-				<div id="playModal" class="modal">
-					<button class="playButton">PLAY!</button>
-				</div>
-					<!-- StopLight -->
-					<div class="stopLight">
-						<div class="redLight"></div>
-						<div class ="greenLight"></div>
+				<!-- StopLight -->
+				<div class="row stopLight_clock_row">
+					<div class="col-md-3"></div>
+					<div class="stopLight col-md-3">
+						<div class="row">
+							<div class="redLight"></div>
+						</div>
+						<div class="row">
+							<div class ="greenLight"></div>
+						</div>
 					</div>
 					<!-- Game Clock -->
-					<div class="clock">
+					<div class="clock col-md-3">
 						00.0
 					</div>
-				<div class="user_piece"></div>
+					<div class="col-md-3"></div>
+				</div>
+				<div class="row">
+					<div class="user_piece"></div>
+					<div id="playModal" class="modal">
+					</div>
+					<button class="playButton">PLAY!</button>
+				</div>
 			</div>
-		</main>
-		<footer>
-			<!-- Add links to social media -->
-			<div class="social_media">
-				<a href="#">Facebook</a>
-				<a href="#">LinkedIn</a>
-				<a href="#">Github</a>
+		</div>
+		<div class="row">
+			<div class="social_media col-md-12">
+				<div class="col-md-4">
+					<a href="https://www.facebook.com/chadkeeven">Facebook</a>
+				</div>
+				<div class="col-md-4">
+					<a href="https://www.linkedin.com/in/eugenechadkeeven/">LinkedIn</a>
+				</div>
+				<div class="col-md-4">
+					<a href="https://github.com/chadkeeven">Github</a>
+				</div>
 			</div>
-		</footer>
+		</div>
 	</div>
 </body>
 </html>

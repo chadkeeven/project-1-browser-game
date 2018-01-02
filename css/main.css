@@ -1,24 +1,17 @@
 body {
-/*	height: 90vh;
-	margin: 0;*/
+
 	font-family: 'Press Start 2P', cursive;
 }
 .title_header {
 	margin-top: 5%;
 }
-
-/*header {
-	height: 20vh;
-}
-main {
-	height: 60vh;
-}
-footer {
-	height: 10vh;
-}*/
 h1 {
 	font-size: 50px;
-}*/
+}
+h2 {
+	font-size: 36px;
+}
+
 .greenPara {
 	color: green;
 	text-transform: uppercase;
@@ -27,17 +20,26 @@ h1 {
 	color: red;
 	text-transform: uppercase;
 }
-/*.container {
-	height: 90vh;
-	width: 90%;
-	margin: 5%;
-}*/
 .landingButtons{
 	display: flex;
 }
+.highScoreList {
+	list-style: none;
+	font-size: 30px;
+	position: relative;
+	left: 35%;
+	margin-bottom: 5%;
+}
+.highScoreCurrent {
+	list-style: none;
+	font-size: 30px;
+	position: relative;
+	margin-bottom: 5%;
+}
 .game_container {
 	width: 100%;
-	height: 100%;
+	height: 500px;
+	margin-bottom: 2%;
 	background-color: black;
 }
 .playButton {
@@ -45,30 +47,27 @@ h1 {
 	margin: 5%;
 	font-size: 36px;
 }
-/*.gameFunctions{
-	width: 100%;
-}*/
 .clock {
 	color: lawngreen;
-	font-size: 400%;
-	display: inline-block;
+	font-size: 40px;
 }
 
 .stopLight {
-	height: 20%;
-	width: 10%;
-	display: inline-block;
+	padding: 1% 7%;
 	background-color: grey;
 }
 .redLight {
 	background-color: red;
-	height: 100%;
+	height: 50px;
 	border-radius: 100%;
 }
 .greenLight {
 	background-color: green;
-	height: 100%;
+	height: 50px;
 	border-radius: 100%;
+}
+#newName {
+	width: 10%;
 }
 
 .user_piece {
@@ -84,13 +83,13 @@ h1 {
 	width: 90%;
 	background-color: rgba(0,0,0,1);
 }
+.stopLight_clock_row {
+	padding: 2%;
+}
 #playModal {
-	height: 20%;
-	width: 20%;
-	right: 40%;
-	bottom:40%;
+	font-size: 70px;
 	color: red;
-	/*background-color: rgba(0,0,0,0.5);*/
+	position: relative;
 }
 
 .highScoresButton {
@@ -110,4 +109,5 @@ h1 {
 #addNameButton {
 	font-family: 'Press Start 2P', cursive;
 	display: none;
+	font-size: 36px;
 }

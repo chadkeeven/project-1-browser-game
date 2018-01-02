@@ -54,20 +54,21 @@ $(document).ready(function() {
 	//function that changes the green and red lights
 	//at random intervals between 1-3 seconds
 	function runStopLight() {
-		$('.greenLight').hide();
+		$('.greenLight').css('background-color', 'rgb(0,0,0)');;
 		stopLight = setInterval(function() {
 			if (!isWinner()) {
 				let stopLightRan = Math.random() * (3000 - 1000) + 1000;
 				if (!switchPending) {
 					//console.log(stopLightRan);
 					setTimeout(function() {
+						console.log($('.greenLight').css('background-color'));
 						//console.log("new switch");
-						if ($('.greenLight').is(':visible')) {
-							$('.redLight').show();
-							$('.greenLight').hide();
-						} else if ($('.greenLight').is(':visible') === false) {
-							$('.greenLight').show();
-							$('.redLight').hide();
+						if ($('.greenLight').css('background-color') === "rgb(0, 128, 0)") {
+							$('.redLight').css('background-color', 'rgb(255,0,0)');
+							$('.greenLight').css('background-color', 'rgb(0,0,0)');
+						} else if ($('.greenLight').css('background-color') != "rgb(0, 128, 0)") {
+							$('.greenLight').css('background-color', 'rgb(0,128,0)');
+							$('.redLight').css('background-color', 'rgb(0,0,0)');
 						}
 						switchPending = false;
 					}, stopLightRan);
@@ -83,10 +84,10 @@ $(document).ready(function() {
 	$(this).keyup(function(event) {
 		if (isWinner() === false) {
 			if (canMove) {
-				if ($('.greenLight').is(':visible') === true) {
+				if ($('.greenLight').css('background-color') === "rgb(0, 128, 0)") {
 					currentMargin += 5;
 					$('.user_piece').css('margin-left', currentMargin + '%');
-				} else if ($('.greenLight').is(':visible') === false) {
+				} else if ($('.greenLight').css('background-color') != "rgb(0, 128, 0)") {
 					if ($('.redLight').is(':visible') && currentMargin > 0) {
 						currentMargin -= 5;
 						$('.user_piece').css('margin-left', currentMargin + '%');
@@ -169,7 +170,7 @@ $(document).ready(function() {
 		for (var rank = 1; rank <= scoresArrTwo.length; rank++) {
 			if (namesArrTwo[rank - 1] === "NEW") {
 				locationOfNewName = rank - 1;
-				$("#" + rank + "").html("<input type='text' id='newName' name='newName' placeholder='Initials' maxlength='3'> : " + scoresArrTwo[rank - 1]);
+				$("#" + rank + "").html("<input type='text' id='newName' name='newName' placeholder='FOO' maxlength='3'> : " + scoresArrTwo[rank - 1]);
 				$("#addNameButton").show();
 			} else {
 				$("#" + rank + "").html(namesArrTwo[rank - 1] + " : " + scoresArrTwo[rank - 1]);
